@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Card Flip Effect in CSS</title>   
+</head>
+<!--prespective css gives an element 3D space by affectine z-palne and user  -->
+
+<style>
+.flip-container{
+/*    the dipper perspectve-the better*/
+/*    Set the perspective from where an element is viewed:*/
+/*    When defining the perspective property for an element, it is the CHILD elements that get the perspective view, NOT the element itself.*/
+    perspective: 600px;
+    width: 250px;
+    height: 250px;
+    }
+/*positioning the front and back images - one starts at 0 deg rotation and the other one starts at 180deg rotation  */
+.front{
+/*front card placed above back card*/
+z-index: 2;
+/*    front card is facing forward by default*/
+transform: rotateY(0deg);
+}
+/*back, initially hidden plane*/
+.back{
+transform: rotateY(180deg);
+}
+    
+.flipper{
+    position: relative;
+/*    specifies how long transition would take*/
+-webkit-transition: 0.5s;
+/*    the transform-style property specifies how nested elements are rendered in 3D space.(flat - do not preserve, preserve-3d - will preserve*/
+    transform-style: preserve-3d;
+    }
+    
+    
+.flip-container:hover .flipper{
+transform:rotateY(180deg);
+}
+    
+    
+.front, .back {
+position: absolute;
+/*hides visibility of flipped card so you can not see the backside as they turning around*/
+-webkit-backface-visibility: hidden;
+/*webkit makes it work in other browsers    */
+width: 250px;
+height: 250px;
+top: 0;
+left: 0;
+}
+</style>
+   
+<body>
+<!--    outside container sets perspective-->
+    <div class = "flip-container">
+<!--        inner container-the one that flips spinning 180 when parent container hovers over-->
+        <div class = "flipper">
+<!--            front and back containers should be in position absolute so they can overlay over each other-->
+            <div class = "front">
+        <!--    front image goes here - blue monster-->
+            <img src = "monsters-01.png"/>
+            </div>
+            <div class = "back">
+        <!--    back image goes here - red monster-->
+            <img src = "monsters-02.png"/>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
